@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 
-class FormCustom extends Component {
+class ContactUs extends Component {
  
     constructor(props) {
         super(props)
@@ -58,8 +58,8 @@ class FormCustom extends Component {
                     </div>
                 </form>
                 <div>
-                    <h1>{`Hola ${this.state.name}`}</h1>
-                    <p>{`Tu correo es: ${this.state.email}`}</p>
+                    <h2>{`Welcome: ${this.state.name}`}</h2>
+                    <p>{`Your email is: ${this.state.email}`}</p>
                 </div>
             </div>
         )
@@ -87,4 +87,4 @@ class FormCustom extends Component {
 
 }
 
-export default FormCustom
+export default ContactUs
