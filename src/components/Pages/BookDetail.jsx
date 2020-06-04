@@ -25,7 +25,7 @@ const BookDetail = ({ match }) => {
                       <h3>Enter your comment:</h3>
                       <input type="text" cols="5" placeholder="Type your comment here..." onChange={ setBookComment.bind(this) }></input>
                       <p>Your comment is: { comment }</p>
-                    </div>                   
+                    </div>                
                 </>
             ) : 
             <h1>Book doesn't exist</h1>

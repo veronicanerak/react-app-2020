@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { addToCart, removeFromCart } from '../../redux/actionCreators'
 
-const BookCard = ({id, title, image, price, author}) => (
+
+const BookCard = ({id, title, image, price, author, addBookToCart, cart, removeBookFromCart}) => (
   <article className="card">
       <div className="img-container s-ratio-16-9 s-radius-tr s-radius-tl">
         <Link to={`/books/${id}`}>
@@ -22,7 +25,21 @@ const BookCard = ({id, title, image, price, author}) => (
           </div>
         </div>
         <div className="s-main-center">
-          <a className="button--ghost-alert button--tiny" href="http://www.test.com">{`$ ${price} USD`}</a>
+          {
+            cart.find( a => a === id)
+            ?
+            <button 
+              className="button--ghost-alert button--tiny"
+              onClick= {()=> removeBookFromCart(id)} 
+            >Remove from the Cart</button>
+            :
+            <button 
+              className="button--ghost-alert button--tiny"
+              onClick= {()=> addBookToCart(id)} 
+            >
+              { `$ ${price} USD` }
+            </button>
+          }          
         </div>
       </div>
   </article>
@@ -43,4 +60,19 @@ BookCard.defaultProps = {
   author: "No author"
 }
 
-export default BookCard
+const mapStateToProps = state => (
+  {
+    cart: state.cart
+  }
+)
+
+const mapDispatchToProps = dispatch => ({
+  addBookToCart(id) {
+    dispatch(addToCart(id))
+  },
+  removeBookFromCart(id) {
+    dispatch(removeFromCart(id))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookCard)
