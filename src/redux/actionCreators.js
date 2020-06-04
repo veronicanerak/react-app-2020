@@ -1,5 +1,6 @@
-import { ADD_TO_CART } from "./actions"
+import { ADD_TO_CART, GET_BOOKS_LIST } from "./actions"
 import { REMOVE_FROM_CART } from "./actions"
+import axios from "axios"
 
 const addToCart = id => (
     {
@@ -15,4 +16,15 @@ const removeFromCart = id => (
     }
 )
 
-export { addToCart, removeFromCart }
+const getBooksList = () => dispatch => {
+    
+    axios.get('https://my-json-server.typicode.com/veronicanerak/json-db-data/books')
+    .then(response => {
+        return dispatch ({
+            type: GET_BOOKS_LIST,
+            data: response.data
+        })
+    })
+}
+
+export { addToCart, removeFromCart, getBooksList }

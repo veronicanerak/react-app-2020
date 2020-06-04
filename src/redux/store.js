@@ -1,12 +1,17 @@
-import { createStore } from "redux"
-import { ADD_TO_CART } from "./actions"
-import { REMOVE_FROM_CART } from "./actions"
+import { createStore, combineReducers, applyMiddleware } from "redux"
+import { ADD_TO_CART, REMOVE_FROM_CART, GET_BOOKS_LIST } from "./actions"
+import thunk from "redux-thunk"
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const initialStore = {
     cart: []
 }
 
-const rootReducer = (state = initialStore, action) => {
+const initialBooks = {
+  books: []
+}
+
+const cartReducer = (state = initialStore, action) => {
 
   if(action.type === ADD_TO_CART) {
 
@@ -27,4 +32,16 @@ const rootReducer = (state = initialStore, action) => {
   return state
 }
 
-export default createStore(rootReducer)
+const booksReducer = (state = initialBooks, action) => {
+  
+  if(action.type === GET_BOOKS_LIST) {
+
+    return {
+      ...state,
+      books: action.data
+    }
+  }
+  return state
+}
+
+export default createStore(combineReducers({ cartReducer, booksReducer }), composeWithDevTools(applyMiddleware(thunk)))

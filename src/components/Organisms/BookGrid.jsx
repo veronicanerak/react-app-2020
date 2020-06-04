@@ -1,6 +1,6 @@
 import React from 'react'
 import BookCard from '../Molecules/BookCard'
-import withLoader from '../HOC/withLoader'
+//import withLoader from '../HOC/withLoader'
 
 const BookGrid = ({ books }) => (      
     <div className="ed-grid m-grid-4">
@@ -19,4 +19,5 @@ const BookGrid = ({ books }) => (
       </div>
 )
 
-export default withLoader("books", BookGrid)
+//export default withLoader("books", BookGrid)
+export default BookGrid
